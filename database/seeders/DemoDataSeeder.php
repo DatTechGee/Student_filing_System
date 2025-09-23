@@ -11,6 +11,13 @@ class DemoDataSeeder extends Seeder
 {
     public function run()
     {
+        // Seed default admin
+        \App\Models\Admin::firstOrCreate([
+            'username' => 'admin'
+        ], [
+            'name' => 'Administrator',
+            'password' => bcrypt('admin'),
+        ]);
         // Create 2 faculties
         $fac1 = Faculty::firstOrCreate(['name' => 'Science']);
         $fac2 = Faculty::firstOrCreate(['name' => 'Arts']);
