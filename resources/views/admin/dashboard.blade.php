@@ -28,41 +28,52 @@
   <!-- Main dashboard -->
   <main class="flex-1 p-4 md:p-10">
     <h2 class="text-2xl md:text-3xl font-bold text-green-700 mb-6 md:mb-8">Dashboard Overview</h2>
-    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-5 gap-4 md:gap-6 mb-8 md:mb-12">
-      <div class="aspect-square max-w-[180px] md:max-w-[220px] w-full bg-gradient-to-br from-green-200 to-green-100 rounded-xl shadow flex flex-col items-center justify-center p-6 md:p-8 break-words mx-auto">
-        <span class="mb-2 text-green-700 text-4xl md:text-5xl">&#127891;</span>
-        <h3 class="text-base md:text-lg font-bold text-green-800 mb-1 md:mb-2">Faculties</h3>
-        <p class="text-2xl md:text-4xl font-bold text-green-900">{{ $facultiesCount }}</p>
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 xl:grid-cols-5 gap-6 mb-12">
+      <div class="bg-white border-t-8 border-green-500 rounded-2xl shadow-lg flex flex-col items-center justify-center p-8 transition-transform hover:scale-105">
+        <span class="mb-3 text-green-600 text-5xl">🏫</span>
+        <h3 class="text-lg font-bold text-green-800 mb-1">Faculties</h3>
+        <p class="text-3xl font-extrabold text-green-900">{{ $facultiesCount }}</p>
       </div>
-      <div class="aspect-square max-w-[180px] md:max-w-[220px] w-full bg-gradient-to-br from-purple-200 to-purple-100 rounded-xl shadow flex flex-col items-center justify-center p-6 md:p-8 break-words mx-auto">
-        <span class="mb-2 text-purple-700 text-4xl md:text-5xl">&#128218;</span>
-        <h3 class="text-base md:text-lg font-bold text-purple-800 mb-1 md:mb-2">Departments</h3>
-        <p class="text-2xl md:text-4xl font-bold text-purple-900">{{ $departmentsCount }}</p>
+      <div class="bg-white border-t-8 border-purple-500 rounded-2xl shadow-lg flex flex-col items-center justify-center p-8 transition-transform hover:scale-105">
+        <span class="mb-3 text-purple-600 text-5xl">🏢</span>
+        <h3 class="text-lg font-bold text-purple-800 mb-1">Departments</h3>
+        <p class="text-3xl font-extrabold text-purple-900">{{ $departmentsCount }}</p>
       </div>
-      <div class="aspect-square max-w-[180px] md:max-w-[220px] w-full bg-gradient-to-br from-blue-200 to-blue-100 rounded-xl shadow flex flex-col items-center justify-center p-6 md:p-8 break-words mx-auto">
-        <span class="mb-2 text-blue-700 text-4xl md:text-5xl">&#128100;</span>
-        <h3 class="text-base md:text-lg font-bold text-blue-800 mb-1 md:mb-2">Students</h3>
-        <p class="text-2xl md:text-4xl font-bold text-blue-900">{{ $studentsCount }}</p>
+      <div class="bg-white border-t-8 border-blue-500 rounded-2xl shadow-lg flex flex-col items-center justify-center p-8 transition-transform hover:scale-105">
+        <span class="mb-3 text-blue-600 text-5xl">👨‍🎓</span>
+        <h3 class="text-lg font-bold text-blue-800 mb-1">Students</h3>
+        <p class="text-3xl font-extrabold text-blue-900">{{ $studentsCount }}</p>
       </div>
-      <div class="aspect-square max-w-[180px] md:max-w-[220px] w-full bg-gradient-to-br from-yellow-200 to-yellow-100 rounded-xl shadow flex flex-col items-center justify-center p-6 md:p-8 break-words mx-auto">
-        <span class="mb-2 text-yellow-700 text-4xl md:text-5xl">&#128221;</span>
-        <h3 class="text-base md:text-lg font-bold text-yellow-800 mb-1 md:mb-2">Requirements</h3>
-        <p class="text-2xl md:text-4xl font-bold text-yellow-900">{{ $requirementsCount }}</p>
+      <div class="bg-white border-t-8 border-yellow-400 rounded-2xl shadow-lg flex flex-col items-center justify-center p-8 transition-transform hover:scale-105">
+        <span class="mb-3 text-yellow-500 text-5xl">📄</span>
+        <h3 class="text-lg font-bold text-yellow-800 mb-1">Requirements</h3>
+        <p class="text-3xl font-extrabold text-yellow-900">{{ $requirementsCount }}</p>
       </div>
-       <div class="aspect-square max-w-[180px] md:max-w-[220px] w-full bg-gradient-to-br from-red-200 to-red-100 rounded-xl shadow flex flex-col items-center justify-center p-6 md:p-8 break-words mx-auto">
-        <span class="mb-2 text-yellow-700 text-4xl md:text-5xl">&#128190;</span>
-        <h3 class="text-base md:text-lg font-bold text-yellow-800 mb-1 md:mb-2">Requirements</h3>
-        <p class="text-2xl md:text-4xl font-bold text-yellow-900">{{ $requirementsCount }}</p>
+      <div class="bg-white border-t-8 border-pink-400 rounded-2xl shadow-lg flex flex-col items-center justify-center p-8 transition-transform hover:scale-105">
+        <span class="mb-3 text-pink-500 text-5xl">🗂️</span>
+        <h3 class="text-lg font-bold text-pink-800 mb-1">Uploads</h3>
+        <p class="text-3xl font-extrabold text-pink-900">{{ $uploadedFilesCount }}</p>
       </div>
     </div>
-  <div class="flex gap-2 md:gap-4 flex-wrap">
-  <div class="w-full flex flex-wrap justify-center gap-2 md:gap-4">
-    <a href="{{ route('faculties.index') }}" class="px-6 py-3 rounded shadow flex items-center gap-2 bg-green-200 text-green-900 hover:bg-green-300 font-semibold"><span class="text-lg">🏫</span> Manage Faculties</a>
-    <a href="{{ route('departments.index') }}" class="px-6 py-3 rounded shadow flex items-center gap-2 bg-purple-200 text-purple-900 hover:bg-purple-300 font-semibold"><span class="text-lg">🏢</span> Manage Departments</a>
-    <a href="{{ route('students.index') }}" class="px-6 py-3 rounded shadow flex items-center gap-2 bg-blue-200 text-blue-900 hover:bg-blue-300 font-semibold"><span class="text-lg">👨‍🎓</span> Manage Students</a>
-    <a href="{{ route('students.bulk_upload') }}" class="px-6 py-3 rounded shadow flex items-center gap-2 bg-blue-600 text-white hover:bg-blue-700 font-semibold"><span class="text-lg">📥</span> Bulk Upload Students</a>
-    <a href="{{ route('document-requirements.index') }}" class="px-6 py-3 rounded shadow flex items-center gap-2 bg-yellow-200 text-yellow-900 hover:bg-yellow-300 font-semibold"><span class="text-lg">📄</span> Document Requirements</a>
-    <a href="{{ route('admin.uploads.index') }}" class="px-6 py-3 rounded shadow flex items-center gap-2 bg-pink-200 text-pink-900 hover:bg-pink-300 font-semibold"><span class="text-lg">🗂️</span> View Uploads</a>
+  <div class="flex gap-4 flex-wrap justify-center mt-8">
+    <a href="{{ route('faculties.index') }}" class="flex items-center gap-3 px-8 py-4 rounded-xl shadow-lg bg-gradient-to-r from-green-400 to-green-600 text-white font-bold text-lg hover:scale-105 transition-all">
+      <span class="text-2xl">🏫</span> Manage Faculties
+    </a>
+    <a href="{{ route('departments.index') }}" class="flex items-center gap-3 px-8 py-4 rounded-xl shadow-lg bg-gradient-to-r from-purple-400 to-purple-600 text-white font-bold text-lg hover:scale-105 transition-all">
+      <span class="text-2xl">🏢</span> Manage Departments
+    </a>
+    <a href="{{ route('students.index') }}" class="flex items-center gap-3 px-8 py-4 rounded-xl shadow-lg bg-gradient-to-r from-blue-400 to-blue-600 text-white font-bold text-lg hover:scale-105 transition-all">
+      <span class="text-2xl">👨‍🎓</span> Manage Students
+    </a>
+    <a href="{{ route('students.bulk_upload') }}" class="flex items-center gap-3 px-8 py-4 rounded-xl shadow-lg bg-gradient-to-r from-blue-600 to-blue-800 text-white font-bold text-lg hover:scale-105 transition-all">
+      <span class="text-2xl">📥</span> Bulk Upload Students
+    </a>
+    <a href="{{ route('document-requirements.index') }}" class="flex items-center gap-3 px-8 py-4 rounded-xl shadow-lg bg-gradient-to-r from-yellow-400 to-yellow-600 text-white font-bold text-lg hover:scale-105 transition-all">
+      <span class="text-2xl">📄</span> Document Requirements
+    </a>
+    <a href="{{ route('admin.uploads.index') }}" class="flex items-center gap-3 px-8 py-4 rounded-xl shadow-lg bg-gradient-to-r from-pink-400 to-pink-600 text-white font-bold text-lg hover:scale-105 transition-all">
+      <span class="text-2xl">🗂️</span> View Uploads
+    </a>
   </div>
     </div>
   </main>

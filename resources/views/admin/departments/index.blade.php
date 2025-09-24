@@ -42,8 +42,15 @@
             <td class="border p-3 font-semibold">{{ $d->faculty->name }}</td>
             <td class="border p-3 font-semibold">{{ $d->name }}</td>
             <td class="border p-3">
-              <a href="{{ route('departments.edit',$d) }}" class="underline text-blue-700 mr-2">Edit</a>
-              <form action="{{ route('departments.destroy',$d) }}" method="post" class="inline">@csrf @method('DELETE')<button class="underline text-red-700">Delete</button></form>
+              
+              <a href="{{ route('departments.edit',$d) }}" class="text-blue-600 hover:text-blue-800 mr-2 inline-block" title="Edit">
+                <span class="text-xl">✏️</span>
+              </a>
+           <form action="{{ route('departments.destroy',$d) }}" method="post" class="inline">@csrf @method('DELETE')
+                <button class="text-red-600 hover:text-red-800 inline-block" title="Delete">
+                  <span class="text-xl">🗑️</span>
+                </button>
+              </form>
             </td>
           </tr>
           @endforeach

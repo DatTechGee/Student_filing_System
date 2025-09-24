@@ -68,5 +68,21 @@ class DemoDataSeeder extends Seeder
             'scope_type' => 'department',
             'scope_id' => $dep3->id,
         ]);
+        // Seed 40 uploaded files: 10 students x 4 requirements
+        $students = \App\Models\Student::take(10)->get();
+        $requirements = \App\Models\DocumentRequirement::take(4)->get();
+        foreach ($students as $s) {
+            foreach ($requirements as $r) {
+                \App\Models\StudentDocument::firstOrCreate([
+                    'student_id' => $s->id,
+                    'requirement_id' => $r->id
+                ], [
+                    'file_path' => 'student_documents/demo.pdf',
+                    'original_filename' => 'demo.pdf',
+                    'uploaded_at' => now(),
+                    'resubmission_requested' => false
+                ]);
+            }
+        }
     }
 }

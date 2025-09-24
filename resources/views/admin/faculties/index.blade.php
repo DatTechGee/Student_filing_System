@@ -43,8 +43,14 @@
           <tr class="border-b hover:bg-green-50">
             <td class="p-3">{{ $f->name }}</td>
             <td class="p-3">
-              <a href="{{ route('faculties.edit',$f) }}" class="text-blue-600 font-semibold mr-2">Edit</a>
-              <form action="{{ route('faculties.destroy',$f) }}" method="post" class="inline">@csrf @method('DELETE')<button class="text-red-600 font-semibold">Delete</button></form>
+               <a href="{{ route('faculties.edit',$f) }}" class="text-blue-600 hover:text-blue-800 mr-2 inline-block" title="Edit">
+                <span class="text-xl">✏️</span>
+              </a>
+              <form action="{{ route('faculties.destroy',$f) }}" method="post" class="inline">@csrf @method('DELETE')
+                <button class="text-red-600 hover:text-red-800 inline-block" title="Delete">
+                  <span class="text-xl">🗑️</span>
+                </button>
+              </form>
             </td>
           </tr>
           @endforeach

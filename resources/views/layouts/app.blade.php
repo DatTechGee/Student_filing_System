@@ -17,19 +17,19 @@
   </style>
 </head>
 <body class="bg-green-50 min-h-screen text-gray-800">
-  <nav class="bg-white shadow p-4">
+  <nav class="bg-white shadow p-4 stic">
     <div class="max-w-6xl mx-auto flex justify-between items-center">
       <a href="/" class="text-xl font-bold text-green-700"> Student Filing System</a>
-      <div class="space-x-3">
+      <div class="flex gap-2">
         @if(session('admin_id'))
-          <a href="{{ route('admin.dashboard') }}" class="text-sm">Admin Dashboard</a>
-          <a href="{{ route('admin.logout') }}" class="text-sm text-red-600">Logout</a>
+          <a href="{{ route('admin.dashboard') }}" class="bg-gradient-to-r from-green-500 to-green-700 text-white px-5 py-2 rounded-xl shadow-lg font-bold text-sm flex items-center gap-1 hover:scale-105 transition-all"><span class="text-lg">🛡️</span> Admin Dashboard</a>
+          <a href="{{ route('admin.logout') }}" class="bg-gradient-to-r from-red-400 to-red-600 text-white px-5 py-2 rounded-xl shadow-lg font-bold text-sm flex items-center gap-1 hover:scale-105 transition-all"><span class="text-lg">🚪</span> Logout</a>
         @elseif(session('student_id'))
-          <a href="{{ route('student.dashboard') }}" class="text-sm">Student Dashboard</a>
-          <a href="{{ route('student.logout') }}" class="text-sm text-red-600">Logout</a>
+          <a href="{{ route('student.dashboard') }}" class="bg-gradient-to-r from-blue-500 to-blue-700 text-white px-5 py-2 rounded-xl shadow-lg font-bold text-sm flex items-center gap-1 hover:scale-105 transition-all"><span class="text-lg">🎓</span> Student Dashboard</a>
+          <a href="{{ route('student.logout') }}" class="bg-gradient-to-r from-red-400 to-red-600 text-white px-5 py-2 rounded-xl shadow-lg font-bold text-sm flex items-center gap-1 hover:scale-105 transition-all"><span class="text-lg">🚪</span> Logout</a>
         @else
-          <a href="{{ route('admin.login') }}" class="text-sm">Admin Login</a>
-          <a href="{{ route('student.login') }}" class="text-sm">Student Login</a>
+          <a href="{{ route('admin.login') }}" class="bg-gradient-to-r from-green-500 to-green-700 text-white px-5 py-2 rounded-xl shadow-lg font-bold text-sm flex items-center gap-1 hover:scale-105 transition-all"><span class="text-lg">🛡️</span> Admin Login</a>
+          <a href="{{ route('student.login') }}" class="bg-gradient-to-r from-blue-500 to-blue-700 text-white px-5 py-2 rounded-xl shadow-lg font-bold text-sm flex items-center gap-1 hover:scale-105 transition-all"><span class="text-lg">🎓</span> Student Login</a>
         @endif
       </div>
     </div>

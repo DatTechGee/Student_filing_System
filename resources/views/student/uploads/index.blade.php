@@ -44,8 +44,12 @@
                 @if($uploaded[$req->id]->resubmission_requested)
                   <div class="text-red-700 font-bold text-xs mb-1">Resubmission Requested</div>
                 @endif
-                <a class="text-sm underline text-green-700 mr-2" href="{{ route('student.uploads.download', $uploaded[$req->id]->id) }}">Download</a>
-                <a class="text-sm underline text-blue-700" href="{{ route('student.uploads.edit', $uploaded[$req->id]->id) }}">Re-upload</a>
+                <a class="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-blue-100 text-blue-800 font-semibold shadow hover:bg-blue-200 transition-all mr-2" href="{{ route('student.uploads.edit', $uploaded[$req->id]->id) }}">
+                  <span class="text-lg">🔄</span> Re-upload
+                </a>
+                <a class="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-purple-100 text-purple-800 font-semibold shadow hover:bg-purple-200 transition-all" href="{{ asset('storage/'.$uploaded[$req->id]->file_path) }}" target="_blank">
+              <span class="text-lg"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 12s3.75-7.5 9.75-7.5 9.75 7.5 9.75 7.5-3.75 7.5-9.75 7.5S2.25 12 2.25 12z" /><circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="1.5" fill="none"/></svg></span> View
+                </a>
               @else
                 <div class="text-red-700 font-semibold mb-1">Pending</div>
                 <a class="bg-gradient-to-r from-green-500 to-green-700 text-white px-4 py-2 rounded-xl shadow font-bold text-sm hover:scale-105 transition-all" href="{{ route('student.uploads.create', $req->id) }}">Upload</a>

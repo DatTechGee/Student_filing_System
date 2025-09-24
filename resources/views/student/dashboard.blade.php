@@ -27,21 +27,21 @@
       <div class="mb-2 md:mb-4 text-base md:text-lg text-gray-700">Matric No: <span class="font-semibold">{{ $student->matric_no }}</span></div>
       <div class="mb-2 md:mb-4 text-base md:text-lg text-gray-700">Faculty: <span class="font-semibold">{{ $student->faculty->name ?? '' }}</span></div>
       <div class="mb-2 md:mb-4 text-base md:text-lg text-gray-700">Department: <span class="font-semibold">{{ $student->department->name ?? '' }}</span></div>
-      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 md:gap-8 my-6 md:my-10">
-        <div class="p-4 md:p-8 bg-gradient-to-br from-green-200 to-green-100 rounded-xl shadow flex flex-col items-center justify-center">
-          <span class="mb-2 text-green-700 text-3xl md:text-4xl">&#128196;</span>
-          <h3 class="text-base md:text-lg font-bold text-green-800 mb-1 md:mb-2">Required Docs</h3>
-          <p class="text-xl md:text-3xl font-bold text-green-900">{{ $requirementsCount }}</p>
+      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 my-10">
+  <div class="bg-white border-t-8 border-green-500 rounded-2xl shadow-lg flex flex-col items-center justify-center p-8 transition-transform hover:scale-105">
+          <span class="mb-3 text-green-600 text-4xl md:text-5xl">📄</span>
+          <h3 class="text-lg font-bold text-green-800 mb-1">Required Docs</h3>
+          <p class="text-2xl md:text-3xl font-extrabold text-green-900">{{ $requirementsCount }}</p>
         </div>
-        <div class="p-4 md:p-8 bg-gradient-to-br from-blue-200 to-blue-100 rounded-xl shadow flex flex-col items-center justify-center">
-          <span class="mb-2 text-blue-700 text-3xl md:text-4xl">&#9989;</span>
-          <h3 class="text-base md:text-lg font-bold text-blue-800 mb-1 md:mb-2">Uploaded</h3>
-          <p class="text-xl md:text-3xl font-bold text-blue-900">{{ $uploadedCount }}</p>
+  <div class="bg-white border-t-8 border-blue-500 rounded-2xl shadow-lg flex flex-col items-center justify-center p-8 transition-transform hover:scale-105">
+          <span class="mb-3 text-blue-600 text-4xl md:text-5xl">✅</span>
+          <h3 class="text-lg font-bold text-blue-800 mb-1">Uploaded</h3>
+          <p class="text-2xl md:text-3xl font-extrabold text-blue-900">{{ $uploadedCount }}</p>
         </div>
-        <div class="p-4 md:p-8 bg-gradient-to-br from-red-200 to-red-100 rounded-xl shadow flex flex-col items-center justify-center">
-          <span class="mb-2 text-red-700 text-3xl md:text-4xl">&#128257;</span>
-          <h3 class="text-base md:text-lg font-bold text-red-800 mb-1 md:mb-2">Resubmission Requested</h3>
-          <p class="text-xl md:text-3xl font-bold text-red-900">{{ $pendingResubmissions }}</p>
+  <div class="bg-white border-t-8 border-red-400 rounded-2xl shadow-lg flex flex-col items-center justify-center p-8 transition-transform hover:scale-105">
+          <span class="mb-3 text-red-500 text-4xl md:text-5xl">📤</span>
+          <h3 class="text-lg font-bold text-red-800 mb-1">Resubmission Requested</h3>
+          <p class="text-2xl md:text-3xl font-extrabold text-red-900">{{ $pendingResubmissions }}</p>
         </div>
       </div>
       <div class="mt-6 md:mt-8">
