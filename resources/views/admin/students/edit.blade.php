@@ -1,7 +1,6 @@
 @extends('layouts.app')
-@section('title','Students')
+@section('title','Edit Student')
 @section('content')
-
 <div class="min-h-screen bg-gradient-to-br from-green-100 via-white to-blue-100 flex">
   <!-- Sidebar -->
   <aside class="w-72 bg-white shadow-2xl flex flex-col justify-between rounded-r-3xl">
@@ -38,51 +37,28 @@
       </nav>
     </div>
     <div class="p-8 border-t">
-      <span class="text-xs text-gray-400">Students</span>
+      <span class="text-xs text-gray-400">Edit Student</span>
     </div>
   </aside>
-
   <!-- Main content -->
-  <main class="flex-1 p-10">
-    <div class="flex justify-between items-center mb-8">
-      <h2 class="text-3xl font-bold text-green-700">Students</h2>
-      <a href="{{ route('students.create') }}" class="btn-primary px-6 py-3 rounded shadow">Add Student</a>
-    </div>
-    <div class="bg-white rounded-lg shadow p-6">
-      <table class="w-full text-left">
-        <thead>
-          <tr class="bg-green-100">
-            <th class="p-3">Matric No</th>
-            <th class="p-3">Name</th>
-            <th class="p-3">Faculty</th>
-            <th class="p-3">Department</th>
-            <th class="p-3">Action</th>
-          </tr>
-        </thead>
-        <tbody>
-          @foreach($students as $s)
-          <tr class="border-b hover:bg-green-50">
-            <td class="p-3">{{ $s->matric_no }}</td>
-            <td class="p-3">{{ $s->first_name }} {{ $s->last_name }}</td>
-            <td class="p-3">{{ $s->faculty->name }}</td>
-            <td class="p-3">{{ $s->department->name }}</td>
-            <td class="p-3 flex gap-2">
-              <a href="{{ route('students.edit',$s) }}" class="inline-flex items-center px-3 py-2 bg-gradient-to-r from-blue-500 to-blue-700 text-white rounded-lg shadow hover:scale-105 transition-all" title="Edit">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 mr-1"><path stroke-linecap="round" stroke-linejoin="round" d="M16.862 4.487a2.1 2.1 0 113 2.95L7.478 19.82a4.2 4.2 0 01-1.768 1.06l-3.15.9.9-3.15a4.2 4.2 0 011.06-1.768L16.862 4.487z" /></svg>
-                Edit
-              </a>
-              <form action="{{ route('students.destroy',$s) }}" method="post" class="inline">@csrf @method('DELETE')
-                <button onclick="return confirm('Are you sure you want to delete?');" class="inline-flex items-center px-3 py-2 bg-gradient-to-r from-red-500 to-red-700 text-white rounded-lg shadow hover:scale-105 transition-all" title="Delete">
-                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 mr-1"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" /></svg>
-                  Delete
-                </button>
-              </form>
-            </td>
-          </tr>
-          @endforeach
-        </tbody>
-      </table>
-      <div class="mt-6">{{ $students->links() }}</div>
+  <main class="flex-1 p-10 flex flex-col items-center justify-center">
+    <div class="bg-white rounded-lg shadow p-10 w-full max-w-xl">
+      <h2 class="text-3xl font-bold text-green-700 mb-8">Edit Student</h2>
+      <form action="{{ route('students.update', $student) }}" method="post">
+        @csrf @method('PUT')
+        <input name="matric_no" value="{{ $student->matric_no }}" placeholder="Matric No" class="w-full border p-3 rounded mb-4">
+        <input name="first_name" value="{{ $student->first_name }}" placeholder="First Name" class="w-full border p-3 rounded mb-4">
+        <input name="last_name" value="{{ $student->last_name }}" placeholder="Last Name" class="w-full border p-3 rounded mb-4">
+        <select name="faculty_id" class="w-full border p-3 rounded mb-4">
+          @foreach($faculties as $f)<option value="{{ $f->id }}" @if($student->faculty_id == $f->id) selected @endif>{{ $f->name }}</option>@endforeach
+        </select>
+        <select name="department_id" class="w-full border p-3 rounded mb-4">
+          @foreach($departments as $d)<option value="{{ $d->id }}" @if($student->department_id == $d->id) selected @endif>{{ $d->name }}</option>@endforeach
+        </select>
+        <input name="session" value="{{ $student->session }}" placeholder="Session" class="w-full border p-3 rounded mb-4">
+        <input name="password" type="password" placeholder="New Password (leave blank to keep current)" class="w-full border p-3 rounded mb-4">
+        <button class="btn-primary px-6 py-3 rounded shadow">Update</button>
+      </form>
     </div>
   </main>
 </div>

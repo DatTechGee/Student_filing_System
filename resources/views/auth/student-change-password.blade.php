@@ -19,12 +19,18 @@
       <div class="relative">
         <label class="block text-sm font-semibold mb-2">Current Password</label>
         <input id="current_password" type="password" name="current_password" class="w-full border p-3 rounded-xl" required>
-        <button type="button" class="absolute right-3 top-10 text-gray-500" id="eyeCurrent" onclick="togglePassword('current_password','eyeCurrent')">👁️</button>
+        
+        <button type="button" class="absolute right-3 top-10 text-gray-500" id="eyeCurrent" onclick="togglePassword('current_password','eyeCurrent')">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 12s3.75-7.5 9.75-7.5 9.75 7.5 9.75 7.5-3.75 7.5-9.75 7.5S2.25 12 2.25 12z" /><circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="1.5" fill="none"/></svg>
+        </button>
       </div>
       <div class="relative">
         <label class="block text-sm font-semibold mb-2">New Password</label>
         <input id="new_password" type="password" name="password" class="w-full border p-3 rounded-xl" required>
-        <button type="button" class="absolute right-3 top-10 text-gray-500" id="eyeNew" onclick="togglePassword('new_password','eyeNew')">👁️</button>
+        
+        <button type="button" class="absolute right-3 top-10 text-gray-500" id="eyeNew" onclick="togglePassword('new_password','eyeNew')">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 12s3.75-7.5 9.75-7.5 9.75 7.5 9.75 7.5-3.75 7.5-9.75 7.5S2.25 12 2.25 12z" /><circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="1.5" fill="none"/></svg>
+        </button>
       </div>
       <div>
         <label class="block text-sm font-semibold mb-2">Confirm New Password</label>

@@ -7,9 +7,8 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=figtree:400,600&display=swap" rel="stylesheet" />
-    <style>
-        /* ...existing code... */
-    </style>
+    <link rel="icon" type="image/svg+xml" href="{{ asset('favicon.svg') }}">
+   
 </head>
 <body class="antialiased bg-gradient-to-br from-green-100 via-white to-blue-100 min-h-screen">
     <div class="flex min-h-screen">
@@ -21,8 +20,16 @@
                     <p class="mt-3 text-gray-500 text-lg">Welcome to the digital records portal</p>
                 </div>
                 <nav class="mt-8 flex flex-col gap-2 px-8">
-                    <a href="#purpose" class="py-3 px-4 rounded hover:bg-green-100 font-semibold text-green-700 flex items-center gap-2"><span class="text-lg">🎯</span> Purpose</a>
-                    <a href="#services" class="py-3 px-4 rounded hover:bg-green-100 flex items-center gap-2"><span class="text-lg">🛠️</span> Our Services</a>
+                                        <a href="#purpose" class="py-3 px-4 rounded hover:bg-green-100 font-semibold text-green-700 flex items-center gap-2">
+                                            <span class="text-lg">
+                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5"><circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="1.5" fill="none"/><path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6l4 2"/></svg>
+                                            </span> Purpose
+                                        </a>
+                                        <a href="#services" class="py-3 px-4 rounded hover:bg-green-100 flex items-center gap-2">
+                                            <span class="text-lg">
+                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5"><path stroke-linecap="round" stroke-linejoin="round" d="M4.75 19.25v-2.5A2.25 2.25 0 017 14.5h10a2.25 2.25 0 012.25 2.25v2.5M9.75 10.75v-2.5a2.25 2.25 0 012.25-2.25h.5a2.25 2.25 0 012.25 2.25v2.5" /></svg>
+                                            </span> Our Services
+                                        </a>
                 </nav>
             </div>
             <div class="p-8 border-t">
@@ -42,20 +49,28 @@
                     <a href="{{ route('admin.login') }}" class="bg-gradient-to-r from-green-500 to-green-700 text-white px-8 py-4 rounded-xl shadow-lg hover:scale-105 hover:from-green-600 hover:to-green-800 transition-all font-bold text-lg">Admin Login</a>
                     <a href="{{ route('student.login') }}" class="bg-gradient-to-r from-blue-500 to-blue-700 text-white px-8 py-4 rounded-xl shadow-lg hover:scale-105 hover:from-blue-600 hover:to-blue-800 transition-all font-bold text-lg">Student Login</a>
                 </div>
-                <section id="purpose" class="mb-10">
-                    <h2 class="text-3xl font-bold text-green-700 mb-3 flex items-center gap-2"><span class="text-2xl">🎯</span> Purpose</h2>
+                                <section id="purpose" class="mb-10">
+                                        <h2 class="text-3xl font-bold text-green-700 mb-3 flex items-center gap-2">
+                                            <span class="text-2xl">
+                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-7 h-7"><circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="1.5" fill="none"/><path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6l4 2"/></svg>
+                                            </span> Purpose
+                                        </h2>
                     <p class="text-gray-700 text-lg">Our system streamlines the management of student records, document requirements, and uploads for educational institutions. It provides a secure, organized, and efficient way for both students and administrators to handle academic documentation.</p>
                 </section>
-                <section id="services">
-                    <h2 class="text-3xl font-bold text-green-700 mb-3 flex items-center gap-2"><span class="text-2xl">🛠️</span> Our Services</h2>
+                                <section id="services">
+                                        <h2 class="text-3xl font-bold text-green-700 mb-3 flex items-center gap-2">
+                                            <span class="text-2xl">
+                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-7 h-7"><path stroke-linecap="round" stroke-linejoin="round" d="M4.75 19.25v-2.5A2.25 2.25 0 017 14.5h10a2.25 2.25 0 012.25 2.25v2.5M9.75 10.75v-2.5a2.25 2.25 0 012.25-2.25h.5a2.25 2.25 0 012.25 2.25v2.5" /></svg>
+                                            </span> Our Services
+                                        </h2>
                     <ul class="text-left text-gray-700 list-disc list-inside text-lg space-y-2">
-                        <li><span class="text-green-600 mr-2">📝</span> Student registration and profile management</li>
-                        <li><span class="text-blue-600 mr-2">📥</span> Bulk student upload for admins</li>
-                        <li><span class="text-yellow-600 mr-2">📄</span> Document requirement setup and tracking</li>
-                        <li><span class="text-pink-600 mr-2">🗂️</span> Secure file uploads and storage</li>
-                        <li><span class="text-purple-600 mr-2">📊</span> Admin dashboard with statistics</li>
-                        <li><span class="text-indigo-600 mr-2">🏫</span> Department and faculty management</li>
-                        <li><span class="text-green-700 mr-2">💻</span> Responsive, user-friendly interface</li>
+                        <li><span class="text-green-600 mr-2"><svg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke-width='1.5' stroke='currentColor' class='w-5 h-5'><path stroke-linecap='round' stroke-linejoin='round' d='M16.5 7.5V6.75A2.25 2.25 0 0014.25 4.5h-4.5A2.25 2.25 0 007.5 6.75v.75m9 0v.75a2.25 2.25 0 01-2.25 2.25h-4.5A2.25 2.25 0 017.5 8.25v-.75m9 0a2.25 2.25 0 012.25 2.25v7.5A2.25 2.25 0 0116.5 19.5h-9A2.25 2.25 0 015.25 17.25v-7.5A2.25 2.25 0 017.5 7.5m9 0H7.5' /></svg></span> Student registration and profile management</li>
+                        <li><span class="text-blue-600 mr-2"><svg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke-width='1.5' stroke='currentColor' class='w-5 h-5'><rect width='16' height='12' x='4' y='8' rx='2' stroke='currentColor' stroke-width='1.5' fill='none'/><path stroke-linecap='round' stroke-linejoin='round' d='M12 12v4m0 0l-2-2m2 2l2-2'/></svg></span> Bulk student upload for admins</li>
+                        <li><span class="text-yellow-600 mr-2"><svg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke-width='1.5' stroke='currentColor' class='w-5 h-5'><rect width='16' height='20' x='4' y='2' rx='2' stroke='currentColor' stroke-width='1.5' fill='none'/><path stroke-linecap='round' stroke-linejoin='round' d='M8 6h8M8 10h8M8 14h4'/></svg></span> Document requirement setup and tracking</li>
+                        <li><span class="text-pink-600 mr-2"><svg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke-width='1.5' stroke='currentColor' class='w-5 h-5'><rect width='16' height='12' x='4' y='8' rx='2' stroke='currentColor' stroke-width='1.5' fill='none'/><path stroke-linecap='round' stroke-linejoin='round' d='M12 12v4m0 0l-2-2m2 2l2-2'/></svg></span> Secure file uploads and storage</li>
+                        <li><span class="text-purple-600 mr-2"><svg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke-width='1.5' stroke='currentColor' class='w-5 h-5'><path stroke-linecap='round' stroke-linejoin='round' d='M3 3v18h18V3H3zm3 3h12v12H6V6z' /></svg></span> Admin dashboard with statistics</li>
+                        <li><span class="text-indigo-600 mr-2"><svg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke-width='1.5' stroke='currentColor' class='w-5 h-5'><path stroke-linecap='round' stroke-linejoin='round' d='M3 10.5l9-6 9 6M4.5 10.5v7.5a1.5 1.5 0 001.5 1.5h12a1.5 1.5 0 001.5-1.5v-7.5' /></svg></span> Department and faculty management</li>
+                        <li><span class="text-green-700 mr-2"><svg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke-width='1.5' stroke='currentColor' class='w-5 h-5'><rect x='2' y='6' width='20' height='12' rx='2' stroke='currentColor' stroke-width='1.5' fill='none'/><path stroke-linecap='round' stroke-linejoin='round' d='M8 12h8M8 16h8M8 8h8'/></svg></span> Responsive, user-friendly interface</li>
                     </ul>
                 </section>
             </div>

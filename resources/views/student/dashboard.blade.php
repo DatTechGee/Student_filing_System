@@ -11,9 +11,15 @@
         <span class="text-2xl font-bold text-green-700">Student Panel</span>
       </div>
       <nav class="mt-8 flex flex-col gap-2 px-8">
-        <a href="{{ route('student.dashboard') }}" class="py-3 px-4 rounded bg-green-100 font-semibold text-green-700 flex items-center gap-2"><span class="text-lg">🏠</span> Dashboard</a>
-        <a href="{{ route('student.uploads.index') }}" class="py-3 px-4 rounded hover:bg-green-100 flex items-center gap-2"><span class="text-lg">📄</span> My Documents</a>
-        <a href="{{ route('student.change_password') }}" class="py-3 px-4 rounded hover:bg-yellow-100 text-yellow-700 font-semibold flex items-center gap-2"><span class="text-lg">🔒</span> Change Password</a>
+  <a href="{{ route('student.dashboard') }}" class="py-3 px-4 rounded-xl bg-gradient-to-r from-green-500 to-green-700 text-white font-bold flex items-center gap-2 shadow hover:scale-105 transition-all {{ request()->routeIs('student.dashboard') ? 'ring-2 ring-green-400 scale-105' : '' }}">
+          <span class="text-lg"><svg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke-width='1.5' stroke='currentColor' class='w-5 h-5'><path stroke-linecap='round' stroke-linejoin='round' d='M3 12l9-9 9 9M4.5 10.5v9a1.5 1.5 0 001.5 1.5h3.75m6 0h3.75a1.5 1.5 0 001.5-1.5v-9M9 21h6'/></svg></span> Dashboard
+        </a>
+  <a href="{{ route('student.uploads.index') }}" class="py-3 px-4 rounded-xl bg-gradient-to-r from-blue-500 to-blue-700 text-white font-bold flex items-center gap-2 shadow hover:scale-105 transition-all {{ request()->routeIs('student.uploads.index') ? 'ring-2 ring-blue-400 scale-105' : '' }}">
+          <span class="text-lg"><svg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke-width='1.5' stroke='currentColor' class='w-5 h-5'><rect width='16' height='20' x='4' y='2' rx='2' stroke='currentColor' stroke-width='1.5' fill='none'/><path stroke-linecap='round' stroke-linejoin='round' d='M8 6h8M8 10h8M8 14h4'/></svg></span> My Documents
+        </a>
+  <a href="{{ route('student.change_password') }}" class="py-3 px-4 rounded-xl bg-gradient-to-r from-yellow-400 to-yellow-600 text-white font-bold flex items-center gap-2 shadow hover:scale-105 transition-all {{ request()->routeIs('student.change_password') ? 'ring-2 ring-yellow-400 scale-105' : '' }}">
+          <span class="text-lg"><svg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke-width='1.5' stroke='currentColor' class='w-5 h-5'><rect width='16' height='20' x='4' y='2' rx='2' stroke='currentColor' stroke-width='1.5' fill='none'/><path stroke-linecap='round' stroke-linejoin='round' d='M12 17v-6m0 0V7m0 4h.01'/></svg></span> Change Password
+        </a>
       </nav>
     </div>
     <div class="p-8 border-t">
@@ -29,17 +35,17 @@
       <div class="mb-2 md:mb-4 text-base md:text-lg text-gray-700">Department: <span class="font-semibold">{{ $student->department->name ?? '' }}</span></div>
       <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 my-10">
   <div class="bg-white border-t-8 border-green-500 rounded-2xl shadow-lg flex flex-col items-center justify-center p-8 transition-transform hover:scale-105">
-          <span class="mb-3 text-green-600 text-4xl md:text-5xl">📄</span>
+          <span class="mb-3 text-green-600 text-4xl md:text-5xl"><svg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke-width='1.5' stroke='currentColor' class='w-10 h-10'><rect width='16' height='20' x='4' y='2' rx='2' stroke='currentColor' stroke-width='1.5' fill='none'/><path stroke-linecap='round' stroke-linejoin='round' d='M8 6h8M8 10h8M8 14h4'/></svg></span>
           <h3 class="text-lg font-bold text-green-800 mb-1">Required Docs</h3>
           <p class="text-2xl md:text-3xl font-extrabold text-green-900">{{ $requirementsCount }}</p>
         </div>
   <div class="bg-white border-t-8 border-blue-500 rounded-2xl shadow-lg flex flex-col items-center justify-center p-8 transition-transform hover:scale-105">
-          <span class="mb-3 text-blue-600 text-4xl md:text-5xl">✅</span>
+          <span class="mb-3 text-blue-600 text-4xl md:text-5xl"><svg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke-width='1.5' stroke='currentColor' class='w-10 h-10'><path stroke-linecap='round' stroke-linejoin='round' d='M5 13l4 4L19 7'/></svg></span>
           <h3 class="text-lg font-bold text-blue-800 mb-1">Uploaded</h3>
           <p class="text-2xl md:text-3xl font-extrabold text-blue-900">{{ $uploadedCount }}</p>
         </div>
   <div class="bg-white border-t-8 border-red-400 rounded-2xl shadow-lg flex flex-col items-center justify-center p-8 transition-transform hover:scale-105">
-          <span class="mb-3 text-red-500 text-4xl md:text-5xl">📤</span>
+          <span class="mb-3 text-red-500 text-4xl md:text-5xl"><svg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke-width='1.5' stroke='currentColor' class='w-10 h-10'><path stroke-linecap='round' stroke-linejoin='round' d='M12 17v-6m0 0V7m0 4h.01'/></svg></span>
           <h3 class="text-lg font-bold text-red-800 mb-1">Resubmission Requested</h3>
           <p class="text-2xl md:text-3xl font-extrabold text-red-900">{{ $pendingResubmissions }}</p>
         </div>

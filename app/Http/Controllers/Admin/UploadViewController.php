@@ -45,7 +45,8 @@ class UploadViewController extends Controller
     $faculties = Faculty::orderByDesc('created_at')->get();
     $departments = Department::orderByDesc('created_at')->get();
 
-    $query = Student::with('documents','faculty','department')->orderByDesc('created_at');
+    // Order by updated_at so the most recently updated (uploaded) student comes first
+    $query = Student::with('documents','faculty','department')->orderByDesc('updated_at');
 
     if ($request->filled('faculty_id')) $query->where('faculty_id', $request->faculty_id);
     if ($request->filled('department_id')) $query->where('department_id', $request->department_id);
