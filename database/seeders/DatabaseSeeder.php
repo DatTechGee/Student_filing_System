@@ -14,8 +14,6 @@ class DatabaseSeeder extends Seeder
     {
         $this->call([
             DemoDataSeeder::class,
-            MoreDemoSeeder::class,
-            TestDocumentRequirementSeeder::class,
         ]);
     }
 }

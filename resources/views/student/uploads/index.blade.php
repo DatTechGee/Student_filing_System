@@ -11,10 +11,10 @@
         <span class="text-2xl font-bold text-green-700">Student Panel</span>
       </div>
       <nav class="mt-8 flex flex-col gap-2 px-8">
-  <a href="{{ route('student.dashboard') }}" class="py-3 px-4 rounded-xl bg-gradient-to-r from-green-500 to-green-700 text-white font-bold flex items-center gap-2 shadow hover:scale-105 transition-all {{ request()->routeIs('student.dashboard') ? 'ring-2 ring-green-400 scale-105' : '' }}">
+  <a href="{{ route('student.dashboard') }}" class="py-3 px-4 rounded-xl bg-gradient-to-r from-green-500 to-green-700 text-white font-bold flex items-center gap-2 shadow hover:scale-105 transition-all focus:outline-none focus:ring-2 focus:ring-green-500 {{ request()->routeIs('student.dashboard') ? 'ring-2 ring-green-400 scale-105' : '' }}" @if(request()->routeIs('student.dashboard')) aria-current="page" @endif tabindex="0">
           <span class="text-lg"><svg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke-width='1.5' stroke='currentColor' class='w-5 h-5'><path stroke-linecap='round' stroke-linejoin='round' d='M3 12l9-9 9 9M4.5 10.5v9a1.5 1.5 0 001.5 1.5h3.75m6 0h3.75a1.5 1.5 0 001.5-1.5v-9M9 21h6'/></svg></span> Dashboard
         </a>
-  <a href="{{ route('student.uploads.index') }}" class="py-3 px-4 rounded-xl bg-gradient-to-r from-blue-500 to-blue-700 text-white font-bold flex items-center gap-2 shadow hover:scale-105 transition-all {{ request()->routeIs('student.uploads.index') ? 'ring-2 ring-blue-400 scale-105' : '' }}">
+  <a href="{{ route('student.uploads.index') }}" class="py-3 px-4 rounded-xl bg-gradient-to-r from-blue-500 to-blue-700 text-white font-bold flex items-center gap-2 shadow hover:scale-105 transition-all focus:outline-none focus:ring-2 focus:ring-blue-500 {{ request()->routeIs('student.uploads.index') ? 'ring-2 ring-blue-400 scale-105' : '' }}" @if(request()->routeIs('student.uploads.index')) aria-current="page" @endif tabindex="0">
           <span class="text-lg"><svg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke-width='1.5' stroke='currentColor' class='w-5 h-5'><path stroke-linecap='round' stroke-linejoin='round' d='M19.5 14.25V6.75A2.25 2.25 0 0017.25 4.5H6.75A2.25 2.25 0 004.5 6.75v10.5A2.25 2.25 0 006.75 19.5h7.5'/><path stroke-linecap='round' stroke-linejoin='round' d='M16.5 17.25L19.5 20.25 22.5 17.25'/></svg></span> My Documents
         </a>
       </nav>
@@ -51,7 +51,7 @@
                 <a class="inline-flex items-center gap-1 px-3 py-1.5 rounded-xl bg-gradient-to-r from-yellow-400 to-yellow-600 text-white font-bold shadow hover:scale-105 transition-all mr-2" href="{{ route('student.uploads.edit', $uploaded[$req->id]->id) }}">
                   <span class="text-lg"><svg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke-width='1.5' stroke='currentColor' class='w-5 h-5'><path stroke-linecap='round' stroke-linejoin='round' d='M4.5 12a7.5 7.5 0 1115 0 7.5 7.5 0 01-15 0zm7.5-4.5v4.5l3 1.5'/></svg></span> Re-upload
                 </a>
-                <a class="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-purple-100 text-purple-800 font-semibold shadow hover:bg-purple-200 transition-all" href="{{ asset('storage/'.$uploaded[$req->id]->file_path) }}" target="_blank">
+                <a class="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-purple-100 text-purple-800 font-semibold shadow hover:bg-purple-200 transition-all" href="{{ route('student.uploads.download', $uploaded[$req->id]->id) }}" target="_blank">
               <span class="text-lg"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 12s3.75-7.5 9.75-7.5 9.75 7.5 9.75 7.5-3.75 7.5-9.75 7.5S2.25 12 2.25 12z" /><circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="1.5" fill="none"/></svg></span> View
                 </a>
               @else

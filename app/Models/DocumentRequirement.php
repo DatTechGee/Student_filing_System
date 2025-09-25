@@ -13,6 +13,7 @@ class DocumentRequirement extends Model
         'scope_type',
         'faculty_id',
         'department_id',
-        'required_file_type'
+        'required_file_type',
+        'scope',
     ];
 }

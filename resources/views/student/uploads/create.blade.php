@@ -40,15 +40,18 @@
           </ul>
         </div>
       @endif
-      <form action="{{ route('student.uploads.store', $requirement->id) }}" method="post" enctype="multipart/form-data" class="space-y-6">
+      <form action="{{ route('student.uploads.store', $requirement->id) }}" method="post" enctype="multipart/form-data" class="space-y-6" aria-label="Upload Document Form">
         @csrf
         <div>
-          <label class="block text-sm font-semibold mb-2">Choose file (pdf/jpg/png - max 10MB)</label>
-          <input type="file" name="file" class="w-full border p-3 rounded mb-4" required>
+          <label for="file" class="block text-sm font-semibold mb-2">Choose file (pdf, jpg, jpeg, png - max 10MB)</label>
+          <input id="file" type="file" name="file" class="w-full border p-3 rounded mb-4" required aria-required="true" aria-label="Document file">
+          @error('file')
+            <div class="bg-red-100 border border-red-200 p-2 rounded text-red-800 text-sm mt-2">{{ $message }}</div>
+          @enderror
         </div>
         <div class="flex justify-center gap-4">
-          <button class="bg-gradient-to-r from-green-500 to-green-700 text-white px-8 py-3 rounded-xl shadow-lg font-bold text-lg hover:scale-105 transition-all">Upload</button>
-          <a href="{{ route('student.uploads.index') }}" class="bg-gray-100 text-gray-700 px-6 py-3 rounded-xl shadow font-semibold text-lg hover:bg-gray-200 transition-all">Back</a>
+          <button class="bg-gradient-to-r from-green-500 to-green-700 text-white px-8 py-3 rounded-xl shadow-lg font-bold text-lg hover:scale-105 transition-all" aria-label="Upload Document">Upload</button>
+          <a href="{{ route('student.uploads.index') }}" class="bg-gray-100 text-gray-700 px-6 py-3 rounded-xl shadow font-semibold text-lg hover:bg-gray-200 transition-all" aria-label="Back to My Documents">Back</a>
         </div>
       </form>
     </div>

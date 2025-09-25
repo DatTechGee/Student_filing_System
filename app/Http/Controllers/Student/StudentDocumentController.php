@@ -58,7 +58,7 @@ class StudentDocumentController extends Controller
     {
         $requirement = DocumentRequirement::findOrFail($requirementId);
         $request->validate([
-            'file'=>'required|file|mimes:pdf,jpg,jpeg,png,doc,docx,xls,xlsx,mp3,mp4|max:10240'
+            'file'=>'required|file|mimes:pdf,jpg,jpeg,png|max:10240'
         ]);
         $studentId = session('student_id');
 
@@ -103,7 +103,7 @@ class StudentDocumentController extends Controller
     {
         $doc = StudentDocument::findOrFail($id);
         if ($doc->student_id != session('student_id')) abort(403);
-        $request->validate(['file'=>'required|file|mimes:pdf,jpg,jpeg,png|max:10240']);
+    $request->validate(['file'=>'required|file|mimes:pdf,jpg,jpeg,png|max:10240']);
         $file = $request->file('file');
         $path = $file->store('student_documents','public');
         if (Storage::disk('public')->exists($doc->file_path)) {
