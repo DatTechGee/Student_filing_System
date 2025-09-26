@@ -138,7 +138,6 @@ class StudentController extends Controller
     $student->department_id = $request->department_id;
     $student->session = $request->session;
     $student->password = bcrypt($request->password);
-    $student->force_password_change = true;
     $student->save();
 
         return redirect()->route('students.index')->with('success', 'Student created successfully');

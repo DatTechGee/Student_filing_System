@@ -28,9 +28,12 @@ class StudentAuthController extends Controller
 
         session(['student_id'=>$student->id, 'student_name'=>$student->first_name.' '.$student->last_name]);
 
-        // Check if student needs to change password on first login
-        if ($student->force_password_change ?? false) {
+        // If password is still default, require change
+        if (Hash::check('student', $student->password)) {
+            session(['must_change_password' => true]);
             return redirect()->route('student.change_password')->with('info', 'Please change your password before continuing.');
+        } else {
+            session()->forget('must_change_password');
         }
 
         return redirect()->route('student.dashboard');
@@ -62,10 +65,9 @@ class StudentAuthController extends Controller
             return back()->with('error','Current password invalid');
         }
 
-        $student->password = bcrypt($request->password);
-        $student->force_password_change = false;
-        $student->save();
-
-        return redirect()->route('student.dashboard')->with('success','Password changed');
+    $student->password = bcrypt($request->password);
+    $student->save();
+    session()->forget('must_change_password');
+    return redirect()->route('student.dashboard')->with('success','Password changed');
     }
 }
