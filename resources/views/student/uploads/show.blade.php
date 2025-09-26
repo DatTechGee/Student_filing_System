@@ -16,7 +16,7 @@
     </a>
   </x-sidebar>
   <!-- Main Content -->
-  <main class="flex-1 flex flex-col items-center justify-center p-4 md:p-10">
+  <main class="flex-1 flex flex-col items-center justify-center p-4 md:p-10 animate-site-fade-in">
     <div class="bg-white rounded-2xl shadow-2xl p-4 md:p-10 max-w-full md:max-w-2xl w-full border border-green-100">
       <h2 class="text-xl md:text-3xl font-bold text-green-700 mb-6">Uploads for {{ $student->first_name }} {{ $student->last_name }}</h2>
       <div class="overflow-x-auto">

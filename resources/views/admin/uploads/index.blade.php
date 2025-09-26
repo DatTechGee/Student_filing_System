@@ -44,7 +44,7 @@
     </div>
   </aside>
   <!-- Main Content -->
-  <main class="flex-1 flex flex-col items-center justify-center p-10">
+  <main class="flex-1 flex flex-col items-center justify-center p-10 animate-site-fade-in">
     <div class="bg-white rounded-2xl shadow-2xl p-10 max-w-5xl w-full border border-green-100">
       <h2 class="text-3xl font-bold text-green-700 mb-6">Student Uploads</h2>
       <form class="mb-8" method="get">

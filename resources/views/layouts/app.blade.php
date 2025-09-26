@@ -7,6 +7,8 @@
   <link rel="icon" type="image/svg+xml" href="{{ asset('favicon.svg') }}">
   <!-- Tailwind CDN (quick) -->
   <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Alpine.js for interactivity -->
+  <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
   <style>
     /* tweak for light green primary */
     :root {
@@ -57,20 +59,38 @@
     </div>
   </nav>
 
-  <main class="max-w-6xl mx-auto mt-8 p-4">
+  <main class="max-w-6xl mx-auto mt-8 p-4 animate-site-fade-in">
+
     @if(session('success'))
-      <div class="bg-green-100 border border-green-200 p-3 rounded mb-4 text-green-800">
+      <x-toast>
         {{ session('success') }}
-      </div>
+      </x-toast>
     @endif
     @if(session('error'))
-      <div class="bg-red-100 border border-red-200 p-3 rounded mb-4 text-red-800">
-        {{ session('error') }}
-      </div>
+      <x-toast>
+        <span class="text-red-700">{{ session('error') }}</span>
+      </x-toast>
     @endif
 
     @yield('content')
   </main>
+  <style>
+  @keyframes site-fade-in {
+    from { opacity: 0; transform: translateY(40px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .animate-site-fade-in {
+    animation: site-fade-in 0.6s cubic-bezier(0.4,0,0.2,1);
+  }
+  @keyframes notification-fade-in {
+    from { opacity: 0; transform: scale(0.95); }
+    60% { opacity: 1; transform: scale(1.03); }
+    to { opacity: 1; transform: scale(1); }
+  }
+  .animate-notification-fade-in {
+    animation: notification-fade-in 0.5s cubic-bezier(0.4,0,0.2,1);
+  }
+  </style>
 
   <!-- Password toggle script -->
   <script>

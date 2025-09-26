@@ -15,12 +15,7 @@
         </ul>
       </div>
     @endif
-    @if(session('error'))
-      <div class="bg-red-100 border border-red-200 p-3 rounded mb-4 text-red-800">{{ session('error') }}</div>
-    @endif
-    @if(session('success'))
-      <div class="bg-green-100 border border-green-200 p-3 rounded mb-4 text-green-800">{{ session('success') }}</div>
-    @endif
+    {{-- Notifications are now handled globally by the toast component in the layout --}}
     <form action="{{ route('student.uploads.update', $doc->id) }}" method="post" enctype="multipart/form-data" class="space-y-6" aria-label="Re-upload Document Form">
       @csrf
       <div>

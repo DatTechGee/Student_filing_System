@@ -24,7 +24,7 @@
     </div>
   </aside>
   <!-- Main Content -->
-  <main class="flex-1 flex flex-col items-center justify-center p-4 md:p-10">
+  <main class="flex-1 flex flex-col items-center justify-center p-4 md:p-10 animate-site-fade-in">
     <div class="bg-white rounded-2xl shadow-2xl p-6 md:p-10 max-w-3xl w-full border border-green-100">
       <h2 class="text-2xl md:text-3xl font-bold text-green-700 mb-4 md:mb-6">Welcome, {{ session('student_name') }}</h2>
       <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-6">
