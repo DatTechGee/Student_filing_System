@@ -1,3 +1,4 @@
+
 <?php
 
 use Illuminate\Support\Facades\Route;
@@ -61,6 +62,12 @@ Route::prefix('admin')->group(function(){
     Route::get('uploads/file/{doc}', [UploadViewController::class,'details'])->name('admin.uploads.details');
     Route::post('uploads/{doc}/request-resubmission', [UploadViewController::class,'requestResubmission'])->name('admin.uploads.request_resubmission');
     Route::post('uploads/{doc}/cancel-resubmission', [UploadViewController::class,'cancelResubmission'])->name('admin.uploads.cancel_resubmission');
+
+    // Bulk actions for uploads
+    Route::post('uploads/bulk/approve', [UploadViewController::class, 'bulkApprove'])->name('admin.uploads.bulk_approve');
+    Route::post('uploads/bulk/request-resubmission', [UploadViewController::class, 'bulkRequestResubmission'])->name('admin.uploads.bulk_request_resubmission');
+    Route::post('uploads/bulk/delete', [UploadViewController::class, 'bulkDelete'])->name('admin.uploads.bulk_delete');
+    Route::post('uploads/bulk/download', [UploadViewController::class, 'bulkDownload'])->name('admin.uploads.bulk_download');
 });
 
 // Student routes
@@ -72,4 +79,11 @@ Route::prefix('student')->group(function(){
     Route::get('/uploads/{id}/edit', [StudentDocumentController::class,'edit'])->name('student.uploads.edit');
     Route::post('/uploads/{id}/update', [StudentDocumentController::class,'update'])->name('student.uploads.update');
     Route::get('/uploads/{id}/download', [StudentDocumentController::class,'download'])->name('student.uploads.download');
+
+    // Bulk actions for student uploads
+    Route::post('/uploads/bulk/delete', [StudentDocumentController::class, 'bulkDelete'])->name('student.uploads.bulk_delete');
+    Route::post('/uploads/bulk/download', [StudentDocumentController::class, 'bulkDownload'])->name('student.uploads.bulk_download');
 });
+// Notification API routes
+Route::get('/notifications', [\App\Http\Controllers\NotificationController::class, 'index'])->name('notifications.index');
+Route::post('/notifications/{id}/read', [\App\Http\Controllers\NotificationController::class, 'markAsRead'])->name('notifications.read');

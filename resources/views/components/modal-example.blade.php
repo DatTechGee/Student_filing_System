@@ -1,4 +1,4 @@
-<!-- Example usage of the modal component with card UI, focus/hover, badges, and animation -->
+{{-- <!-- Example usage of the modal component with card UI, focus/hover, badges, and animation -->
 <x-modal wire:model="showModal">
     <div class="flex flex-col items-center">
         <span class="inline-block px-3 py-1 rounded-full bg-green-100 text-green-700 text-xs font-semibold mb-2">Success</span>
@@ -41,4 +41,4 @@
 </style>
 
 <!-- Example: Add 'animate-site-fade-in' to your main content divs for a smooth entrance effect -->
-<!-- <div class="main-content animate-site-fade-in"> ... </div> -->
+<!-- <div class="main-content animate-site-fade-in"> ... </div> --> --}}

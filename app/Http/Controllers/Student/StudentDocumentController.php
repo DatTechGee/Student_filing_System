@@ -12,7 +12,51 @@ use App\Models\Student;
 
 
 class StudentDocumentController extends Controller
-{
+
+    // Bulk delete student documents
+    {
+        public function bulkDelete(Request $request)
+    {
+        $ids = $request->input('ids', []);
+        if (empty($ids)) {
+            return back()->with('error', 'No documents selected.');
+        }
+        $docs = StudentDocument::whereIn('id', $ids)->where('student_id', session('student_id'))->get();
+        foreach ($docs as $doc) {
+            if (\Storage::disk('public')->exists($doc->file_path)) {
+                \Storage::disk('public')->delete($doc->file_path);
+            }
+            $doc->delete();
+        }
+        return back()->with('success', 'Selected documents deleted.');
+    }
+
+    // Bulk download student documents (returns a zip)
+    public function bulkDownload(Request $request)
+    {
+        $ids = $request->input('ids', []);
+        if (empty($ids)) {
+            return back()->with('error', 'No documents selected.');
+        }
+        $docs = StudentDocument::whereIn('id', $ids)->where('student_id', session('student_id'))->get();
+        if ($docs->isEmpty()) {
+            return back()->with('error', 'No valid documents found.');
+        }
+        $zip = new \ZipArchive();
+        $zipFile = storage_path('app/public/student_bulk_download_'.time().'.zip');
+        if ($zip->open($zipFile, \ZipArchive::CREATE) !== true) {
+            return back()->with('error', 'Could not create zip file.');
+        }
+        foreach ($docs as $doc) {
+            $filePath = public_path('storage/' . $doc->file_path);
+            if (file_exists($filePath)) {
+                $zip->addFile($filePath, $doc->original_filename);
+            }
+        }
+        $zip->close();
+        return response()->download($zipFile)->deleteFileAfterSend(true);
+    }
+
     public function __construct()
     {
         $this->middleware(function ($request, $next) {

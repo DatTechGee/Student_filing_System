@@ -27,41 +27,69 @@
   <main class="flex-1 flex flex-col items-center justify-center p-4 md:p-10 animate-site-fade-in">
     <div class="bg-white rounded-2xl shadow-2xl p-6 md:p-10 max-w-3xl w-full border border-green-100">
       <h2 class="text-2xl md:text-3xl font-bold text-green-700 mb-4 md:mb-6">Welcome, {{ session('student_name') }}</h2>
-      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-6">
-        @foreach($requirements as $req)
-          <div class="border rounded-xl p-6 bg-rose-50 shadow-md flex flex-col justify-between">
-            <div>
-              <h3 class="font-semibold text-lg mb-2">{{ $req->name }}</h3>
-              <p class="text-sm text-gray-600 mb-2">
-                Scope: {{ $req->scope_type }}
-                @if($req->scope_type == 'faculty' && $req->faculty_id)
-                  (Faculty: {{ optional(App\Models\Faculty::find($req->faculty_id))->name }})
-                @elseif($req->scope_type == 'department' && $req->department_id)
-                  (Department: {{ optional(App\Models\Department::find($req->department_id))->name }})
+      <form method="post" id="bulkActionForm" action="{{ route('student.uploads.bulk_delete') }}" x-data="{ allChecked: false }">
+        @csrf
+        <div class="flex flex-wrap gap-4 mb-4 items-center">
+          <input type="checkbox" @click="allChecked = !allChecked; document.querySelectorAll('.row-check').forEach(cb => cb.checked = allChecked)" aria-label="Select all">
+          <select name="bulk_action" class="border p-2 rounded-xl" id="bulkActionSelect">
+            <option value="">Bulk Action</option>
+            <option value="download">Download</option>
+            <option value="delete">Delete</option>
+          </select>
+          <button type="submit" class="bg-gradient-to-r from-green-500 to-green-700 text-white px-6 py-2 rounded-xl shadow font-bold hover:scale-105 transition-all">Apply</button>
+        </div>
+        <script>
+        document.addEventListener('DOMContentLoaded', function() {
+          var form = document.getElementById('bulkActionForm');
+          var select = document.getElementById('bulkActionSelect');
+          form.addEventListener('submit', function(e) {
+            if (select.value === 'download') {
+              form.action = "{{ route('student.uploads.bulk_download') }}";
+            } else {
+              form.action = "{{ route('student.uploads.bulk_delete') }}";
+            }
+          });
+        });
+        </script>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-6">
+          @foreach($requirements as $req)
+            <div class="border rounded-xl p-6 bg-rose-50 shadow-md flex flex-col justify-between">
+              <div class="flex items-start gap-2">
+                <input type="checkbox" class="row-check mt-1" name="upload_ids[]" value="{{ $uploaded[$req->id]->id ?? '' }}" @if(!isset($uploaded[$req->id])) disabled @endif aria-label="Select upload">
+                <div class="flex-1">
+                  <h3 class="font-semibold text-lg mb-2">{{ $req->name }}</h3>
+                  <p class="text-sm text-gray-600 mb-2">
+                    Scope: {{ $req->scope_type }}
+                    @if($req->scope_type == 'faculty' && $req->faculty_id)
+                      (Faculty: {{ optional(App\Models\Faculty::find($req->faculty_id))->name }})
+                    @elseif($req->scope_type == 'department' && $req->department_id)
+                      (Department: {{ optional(App\Models\Department::find($req->department_id))->name }})
+                    @endif
+                  </p>
+                </div>
+              </div>
+              <div class="text-right mt-4">
+                @if(isset($uploaded[$req->id]))
+                  <div class="text-green-700 font-semibold">Uploaded</div>
+                  <div class="text-xs text-gray-600 mb-1">Uploaded at: {{ $uploaded[$req->id]->uploaded_at }}</div>
+                  @if($uploaded[$req->id]->resubmission_requested)
+                    <div class="text-red-700 font-bold text-xs mb-1">Resubmission Requested</div>
+                  @endif
+                  <a class="inline-flex items-center gap-1 px-3 py-1.5 rounded-xl bg-gradient-to-r from-yellow-400 to-yellow-600 text-white font-bold shadow hover:scale-105 transition-all mr-2" href="{{ route('student.uploads.edit', $uploaded[$req->id]->id) }}">
+                    <span class="text-lg"><svg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke-width='1.5' stroke='currentColor' class='w-5 h-5'><path stroke-linecap='round' stroke-linejoin='round' d='M4.5 12a7.5 7.5 0 1115 0 7.5 7.5 0 01-15 0zm7.5-4.5v4.5l3 1.5'/></svg></span> Re-upload
+                  </a>
+                  <a class="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-purple-100 text-purple-800 font-semibold shadow hover:bg-purple-200 transition-all" href="{{ route('student.uploads.download', $uploaded[$req->id]->id) }}" target="_blank">
+                    <span class="text-lg"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 12s3.75-7.5 9.75-7.5 9.75 7.5 9.75 7.5-3.75 7.5-9.75 7.5S2.25 12 2.25 12z" /><circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="1.5" fill="none"/></svg></span> View
+                  </a>
+                @else
+                  <div class="text-red-700 font-semibold mb-1">Pending</div>
+                  <a class="bg-gradient-to-r from-green-500 to-green-700 text-white px-4 py-2 rounded-xl shadow font-bold text-sm hover:scale-105 transition-all" href="{{ route('student.uploads.create', $req->id) }}">Upload</a>
                 @endif
-              </p>
+              </div>
             </div>
-            <div class="text-right mt-4">
-              @if(isset($uploaded[$req->id]))
-                <div class="text-green-700 font-semibold">Uploaded</div>
-                <div class="text-xs text-gray-600 mb-1">Uploaded at: {{ $uploaded[$req->id]->uploaded_at }}</div>
-                @if($uploaded[$req->id]->resubmission_requested)
-                  <div class="text-red-700 font-bold text-xs mb-1">Resubmission Requested</div>
-                @endif
-                <a class="inline-flex items-center gap-1 px-3 py-1.5 rounded-xl bg-gradient-to-r from-yellow-400 to-yellow-600 text-white font-bold shadow hover:scale-105 transition-all mr-2" href="{{ route('student.uploads.edit', $uploaded[$req->id]->id) }}">
-                  <span class="text-lg"><svg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke-width='1.5' stroke='currentColor' class='w-5 h-5'><path stroke-linecap='round' stroke-linejoin='round' d='M4.5 12a7.5 7.5 0 1115 0 7.5 7.5 0 01-15 0zm7.5-4.5v4.5l3 1.5'/></svg></span> Re-upload
-                </a>
-                <a class="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-purple-100 text-purple-800 font-semibold shadow hover:bg-purple-200 transition-all" href="{{ route('student.uploads.download', $uploaded[$req->id]->id) }}" target="_blank">
-              <span class="text-lg"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 12s3.75-7.5 9.75-7.5 9.75 7.5 9.75 7.5-3.75 7.5-9.75 7.5S2.25 12 2.25 12z" /><circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="1.5" fill="none"/></svg></span> View
-                </a>
-              @else
-                <div class="text-red-700 font-semibold mb-1">Pending</div>
-                <a class="bg-gradient-to-r from-green-500 to-green-700 text-white px-4 py-2 rounded-xl shadow font-bold text-sm hover:scale-105 transition-all" href="{{ route('student.uploads.create', $req->id) }}">Upload</a>
-              @endif
-            </div>
-          </div>
-        @endforeach
-      </div>
+          @endforeach
+        </div>
+      </form>
     </div>
   </main>
 </div>

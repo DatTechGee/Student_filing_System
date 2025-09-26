@@ -80,7 +80,7 @@ class DemoDataSeeder extends Seeder
         $start = $last ? intval(substr($last->matric_no,3)) + 1 : 21;
         for ($i = $start; $i < $start+50; $i++) {
             Student::create([
-                'matric_no' => 'FT23' . str_pad($i, 3, '0', STR_PAD_LEFT),
+                'matric_no' => 'FT' . str_pad($i, 3, '0', STR_PAD_LEFT),
                 'first_name' => 'Student',
                 'last_name' => $i,
                 'faculty_id' => 1,
