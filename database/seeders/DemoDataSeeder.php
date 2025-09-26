@@ -6,6 +6,7 @@ use App\Models\Faculty;
 use App\Models\Department;
 use App\Models\Student;
 use App\Models\DocumentRequirement;
+use Illuminate\Support\Facades\Storage;
 
 class DemoDataSeeder extends Seeder
 {
@@ -18,172 +19,93 @@ class DemoDataSeeder extends Seeder
             'name' => 'Administrator',
             'password' => bcrypt('admin'),
         ]);
-    // Create faculties
-    $fac1 = Faculty::firstOrCreate(['name' => 'Natural and Applied Science']);
-    $fac2 = Faculty::firstOrCreate(['name' => 'Arts']);
-    $fac3 = Faculty::firstOrCreate(['name' => 'Entrepreneur']);
-    $fac4 = Faculty::firstOrCreate(['name' => 'Social Science']);
-    $fac5 = Faculty::firstOrCreate(['name' => 'Law']);
 
-    // Create 2 departments per faculty
-    $dep1 = Department::firstOrCreate(['name' => 'Physics', 'faculty_id' => $fac1->id]);
-    $dep2 = Department::firstOrCreate(['name' => 'Chemistry', 'faculty_id' => $fac1->id]);
-    $dep3 = Department::firstOrCreate(['name' => 'History', 'faculty_id' => $fac2->id]);
-    $dep4 = Department::firstOrCreate(['name' => 'Literature', 'faculty_id' => $fac2->id]);
-    $dep5 = Department::firstOrCreate(['name' => 'Computer Science', 'faculty_id' => $fac1->id]);
-    $dep6 = Department::firstOrCreate(['name' => 'Business Management', 'faculty_id' => $fac3->id]);
-    $dep7 = Department::firstOrCreate(['name' => 'Entrepreneurship Studies', 'faculty_id' => $fac3->id]);
-    $dep8 = Department::firstOrCreate(['name' => 'Economics', 'faculty_id' => $fac4->id]);
-    $dep9 = Department::firstOrCreate(['name' => 'Political Science', 'faculty_id' => $fac4->id]);
-    $dep10 = Department::firstOrCreate(['name' => 'Private Law', 'faculty_id' => $fac5->id]);
-    $dep11 = Department::firstOrCreate(['name' => 'Public Law', 'faculty_id' => $fac5->id]);
-        // Add department-specific requirements for new faculties
-        DocumentRequirement::firstOrCreate([
-            'name' => 'Business Plan',
-            'scope_type' => 'department',
-            'scope_id' => $dep6->id,
-            'scope' => $dep6->name,
-        ]);
-        DocumentRequirement::firstOrCreate([
-            'name' => 'Entrepreneurship Project',
-            'scope_type' => 'department',
-            'scope_id' => $dep7->id,
-            'scope' => $dep7->name,
-        ]);
-        DocumentRequirement::firstOrCreate([
-            'name' => 'Research Paper',
-            'scope_type' => 'department',
-            'scope_id' => $dep8->id,
-            'scope' => $dep8->name,
-        ]);
-        DocumentRequirement::firstOrCreate([
-            'name' => 'Field Work Report',
-            'scope_type' => 'department',
-            'scope_id' => $dep9->id,
-            'scope' => $dep9->name,
-        ]);
-        DocumentRequirement::firstOrCreate([
-            'name' => 'Case Law Analysis',
-            'scope_type' => 'department',
-            'scope_id' => $dep10->id,
-            'scope' => $dep10->name,
-        ]);
-        DocumentRequirement::firstOrCreate([
-            'name' => 'Legal Drafting',
-            'scope_type' => 'department',
-            'scope_id' => $dep11->id,
-            'scope' => $dep11->name,
-        ]);
+        // Create 5 faculties
+        $faculties = [];
+        foreach ([
+            'Natural and Applied Science',
+            'Arts',
+            'Entrepreneur',
+            'Social Science',
+            'Law'
+        ] as $fname) {
+            $faculties[] = Faculty::firstOrCreate(['name' => $fname]);
+        }
 
-        // Create 50 students (original DemoDataSeeder logic)
-        $last = Student::orderBy('id','desc')->first();
-        $start = $last ? intval(substr($last->matric_no,3)) + 1 : 21;
-        for ($i = $start; $i < $start+50; $i++) {
-            Student::create([
+        // Create 25 departments (5 per faculty)
+        $departments = [];
+        $deptNames = [
+            'Physics','Chemistry','Biology','Mathematics','Computer Science',
+            'History','Literature','Philosophy','Languages','Fine Arts',
+            'Business Management','Entrepreneurship Studies','Accounting','Marketing','Finance',
+            'Economics','Political Science','Sociology','Psychology','Geography',
+            'Private Law','Public Law','International Law','Criminology','Legal Studies'
+        ];
+        $deptIdx = 0;
+        foreach ($faculties as $fac) {
+            for ($i=0; $i<5; $i++) {
+                $departments[] = Department::firstOrCreate([
+                    'name' => $deptNames[$deptIdx],
+                    'faculty_id' => $fac->id
+                ]);
+                $deptIdx++;
+            }
+        }
+
+        // Create 8 document requirements
+        $requirements = [];
+        foreach ([
+            ['Passport Photo','global'],
+            ['Birth Certificate','global'],
+            ['JAMB Result','faculty'],
+            ['WAEC Certificate','department'],
+            ['Transcript','department'],
+            ['Medical Report','global'],
+            ['Departmental Clearance','department'],
+            ['Project Proposal','department']
+        ] as $idx => $req) {
+            $scopeType = $req[1];
+            $scopeId = null;
+            if ($scopeType == 'faculty') $scopeId = $faculties[0]->id;
+            if ($scopeType == 'department') $scopeId = $departments[$idx % count($departments)]->id;
+            $requirements[] = DocumentRequirement::firstOrCreate([
+                'name' => $req[0],
+                'scope_type' => $scopeType,
+                'scope_id' => $scopeId,
+                'scope' => $scopeType == 'global' ? 'global' : ($scopeType == 'faculty' ? $faculties[0]->name : $departments[$idx % count($departments)]->name)
+            ]);
+        }
+
+        
+        for ($i = 1; $i <= 40; $i++) {
+            $student = Student::create([
                 'matric_no' => 'FT' . str_pad($i, 3, '0', STR_PAD_LEFT),
                 'first_name' => 'Student',
                 'last_name' => $i,
-                'faculty_id' => 1,
-                'department_id' => 1,
+                'faculty_id' => $faculties[$i % 5]->id,
+                'department_id' => $departments[$i % 25]->id,
                 'session' => '2025/2026',
                 'password' => bcrypt('student'),
             ]);
-        }
-
-        // Add document requirements (original DemoDataSeeder logic)
-        DocumentRequirement::firstOrCreate([
-            'name' => 'Passport Photo',
-            'scope_type' => 'global',
-            'scope_id' => null,
-            'scope' => 'global',
-        ]);
-        DocumentRequirement::firstOrCreate([
-            'name' => 'Birth Certificate',
-            'scope_type' => 'global',
-            'scope_id' => null,
-            'scope' => 'global',
-        ]);
-        DocumentRequirement::firstOrCreate([
-            'name' => 'JAMB Result',
-            'scope_type' => 'faculty',
-            'scope_id' => $fac1->id,
-            'scope' => $fac1->name,
-        ]);
-        DocumentRequirement::firstOrCreate([
-            'name' => 'WAEC Certificate',
-            'scope_type' => 'department',
-            'scope_id' => $dep2->id,
-            'scope' => $dep2->name,
-        ]);
-        DocumentRequirement::firstOrCreate([
-            'name' => 'Transcript',
-            'scope_type' => 'department',
-            'scope_id' => $dep3->id,
-            'scope' => $dep3->name,
-        ]);
-
-        // Add 20 more students (from MoreDemoSeeder)
-        $last = Student::orderBy('id','desc')->first();
-        $start = $last ? intval(substr($last->matric_no,3)) + 1 : 21;
-        for ($i = $start; $i < $start+20; $i++) {
-            Student::create([
-                'matric_no' => 'FT' . str_pad($i, 3, '0', STR_PAD_LEFT),
-                'first_name' => 'Student',
-                'last_name' => $i,
-                'faculty_id' => 1,
-                'department_id' => 1,
-                'session' => '2025/2026',
-                'password' => bcrypt('student'),
-            ]);
-        }
-
-        // Add 5 global requirements (from MoreDemoSeeder)
-        foreach ([
-            'Birth Certificate',
-            'WAEC Result',
-            'JAMB Admission Letter',
-            'Medical Report',
-            'Passport Photograph'
-        ] as $name) {
-            DocumentRequirement::create([
-                'name' => $name,
-                'scope_type' => 'global',
-                'scope_id' => null,
-                'scope' => 'global',
-            ]);
-        }
-
-        // Add 3 department-specific requirements (from MoreDemoSeeder)
-        $departmentName = Department::find(1) ? Department::find(1)->name : 'Department';
-        foreach ([
-            'Departmental Clearance',
-            'Lab Safety Form',
-            'Project Proposal'
-        ] as $name) {
-            DocumentRequirement::create([
-                'name' => $name,
-                'scope_type' => 'department',
-                'scope_id' => 1,
-                'scope' => $departmentName,
-            ]);
-        }
-
-        // Seed 40 uploaded files: 10 students x 4 requirements
-        $students = \App\Models\Student::take(10)->get();
-        $requirements = \App\Models\DocumentRequirement::take(4)->get();
-        foreach ($students as $s) {
-            foreach ($requirements as $r) {
+            // Each student gets 2 random uploads
+            $studentReqs = array_rand($requirements, 2);
+            foreach ($studentReqs as $reqIdx) {
+                $req = $requirements[$reqIdx];
+                $fileName = 'student_' . $i . '_' . str_replace(' ', '_', strtolower($req->name)) . '.pdf';
+                $filePath = 'uploads/' . $fileName;
+                if (!Storage::disk('public')->exists($filePath)) {
+                    Storage::disk('public')->put($filePath, 'Demo PDF content for student ' . $i);
+                }
                 \App\Models\StudentDocument::firstOrCreate([
-                    'student_id' => $s->id,
-                    'requirement_id' => $r->id
+                    'student_id' => $student->id,
+                    'requirement_id' => $req->id,
                 ], [
-                    'file_path' => 'student_documents/demo.pdf',
-                    'original_filename' => 'demo.pdf',
+                    'file_path' => $filePath,
+                    'original_filename' => $fileName,
                     'uploaded_at' => now(),
-                    'resubmission_requested' => false
+                    'resubmission_requested' => false,
                 ]);
             }
         }
     }
-    
 }
