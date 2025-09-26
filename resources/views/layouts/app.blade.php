@@ -61,30 +61,7 @@
       </a>
       <div class="flex gap-2 items-center">
         <!-- Notification Bell -->
-        <div x-data="{ open: false }" class="relative">
-          <button @click="open = !open; if(open) $store.notifications.fetch()" class="relative focus:outline-none" aria-label="Notifications">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-7 h-7 text-green-700">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M14.857 17.082a2.25 2.25 0 01-4.714 0M6.75 8.25a6 6 0 1110.5 0c0 3.098 1.272 4.37 2.25 5.25a.75.75 0 01-.5 1.32H5a.75.75 0 01-.5-1.32c.978-.88 2.25-2.152 2.25-5.25z" />
-            </svg>
-            <span class="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full px-1.5 py-0.5" x-show="$store.notifications && $store.notifications.length > 0" x-text="$store.notifications.length" style="display:none"></span>
-            <span class="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full px-1.5 py-0.5" x-show="$store.notifications && $store.notifications.notifications.filter(n => !n.read).length > 0" x-text="$store.notifications.notifications.filter(n => !n.read).length" style="display:none"></span>
-          </button>
-          <div x-show="open" @click.away="open = false" class="absolute right-0 mt-2 w-80 bg-white border border-green-200 rounded-xl shadow-lg z-50 animate-notification-fade-in" x-cloak>
-            <div class="p-4 border-b font-bold text-green-700 flex items-center gap-2">
-              <svg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke-width='1.5' stroke='currentColor' class='w-5 h-5'><path stroke-linecap='round' stroke-linejoin='round' d='M14.857 17.082a2.25 2.25 0 01-4.714 0M6.75 8.25a6 6 0 1110.5 0c0 3.098 1.272 4.37 2.25 5.25a.75.75 0 01-.5 1.32H5a.75.75 0 01-.5-1.32c.978-.88 2.25-2.152 2.25-5.25z' /></svg>
-              Notifications
-            </div>
-            <ul class="max-h-64 overflow-y-auto divide-y divide-green-100" x-data="{ notifications: $store.notifications || [] }">
-              <template x-for="(note, idx) in $store.notifications.notifications" :key="note.id">
-                <li class="p-4 text-sm flex items-start gap-2" :class="note.read ? 'text-gray-400' : 'text-gray-800 bg-green-50'">
-                  <span x-text="note.message"></span>
-                  <span class="ml-auto text-xs text-gray-400" x-text="note.time"></span>
-                  <button x-show="!note.read" @click="$store.notifications.markAsRead(note.id)" class="ml-2 text-green-600 hover:underline text-xs">Mark as read</button>
-                </li>
-              </template>
-              <li x-show="$store.notifications.notifications.length === 0" class="p-4 text-gray-400 text-center">No notifications</li>
-            </ul>
-          </div>
+       
         </div>
         @if(session('admin_id'))
           <a href="{{ route('admin.dashboard') }}" class="bg-gradient-to-r from-green-500 to-green-700 text-white px-5 py-2 rounded-xl shadow-lg font-bold text-sm flex items-center gap-1 hover:scale-105 transition-all">
