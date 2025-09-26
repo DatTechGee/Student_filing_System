@@ -122,12 +122,12 @@ class DemoDataSeeder extends Seeder
             'scope' => $dep3->name,
         ]);
 
-        // Add 30 more students (from MoreDemoSeeder)
+        // Add 20 more students (from MoreDemoSeeder)
         $last = Student::orderBy('id','desc')->first();
         $start = $last ? intval(substr($last->matric_no,3)) + 1 : 21;
-        for ($i = $start; $i < $start+30; $i++) {
+        for ($i = $start; $i < $start+20; $i++) {
             Student::create([
-                'matric_no' => 'STU' . str_pad($i, 3, '0', STR_PAD_LEFT),
+                'matric_no' => 'FT' . str_pad($i, 3, '0', STR_PAD_LEFT),
                 'first_name' => 'Student',
                 'last_name' => $i,
                 'faculty_id' => 1,

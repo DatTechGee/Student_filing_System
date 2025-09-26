@@ -44,7 +44,7 @@
     </div>
   </aside>
   <!-- Main Content -->
-  <main class="flex-1 flex flex-col items-center justify-center p-10 animate-site-fade-in">
+  <main class="flex-1 flex flex-col items-center justify-center p-10">
     <div class="bg-white rounded-2xl shadow-2xl p-10 max-w-5xl w-full border border-green-100">
       <h2 class="text-3xl font-bold text-green-700 mb-6">Student Uploads</h2>
       <form class="mb-8" method="get">
@@ -66,23 +66,9 @@
         </div>
       </form>
       <div class="overflow-x-auto">
-      <form method="post" action="{{ route('admin.uploads.bulk_action') }}" x-data="{ allChecked: false }">
-        @csrf
-        <div class="flex flex-wrap gap-4 mb-4 items-center">
-          <select name="bulk_action" class="border p-2 rounded-xl">
-            <option value="">Bulk Action</option>
-            <option value="approve">Approve</option>
-            <option value="request_resubmission">Request Resubmission</option>
-            <option value="delete">Delete</option>
-          </select>
-          <button type="submit" class="bg-gradient-to-r from-green-500 to-green-700 text-white px-6 py-2 rounded-xl shadow font-bold hover:scale-105 transition-all">Apply</button>
-        </div>
-        <table class="w-full table-auto border-separate rounded-2xl overflow-hidden shadow-xl">
+  <table class="w-full table-auto border-separate rounded-2xl overflow-hidden shadow-xl">
           <thead class="sticky top-0 z-20">
             <tr class="bg-green-200/80 text-green-800 backdrop-blur border-b-2 border-green-300">
-              <th class="p-4 text-left font-bold whitespace-nowrap">
-                <input type="checkbox" @click="allChecked = !allChecked; document.querySelectorAll('.row-check').forEach(cb => cb.checked = allChecked)" aria-label="Select all">
-              </th>
               <th class="p-4 text-left font-bold whitespace-nowrap">Matric</th>
               <th class="p-4 text-left font-bold whitespace-nowrap">Name</th>
               <th class="p-4 text-left font-bold whitespace-nowrap">Faculty</th>
@@ -94,9 +80,6 @@
           <tbody>
             @foreach($students as $s)
               <tr class="even:bg-green-50 odd:bg-white hover:bg-green-100 focus-within:bg-green-200 transition-colors group">
-                <td class="p-4">
-                  <input type="checkbox" class="row-check" name="student_ids[]" value="{{ $s->id }}" aria-label="Select student">
-                </td>
                 <td class="p-4 font-semibold rounded-l-2xl max-w-[120px] truncate" title="{{ $s->matric_no }}">{{ $s->matric_no }}</td>
                 <td class="p-4 font-semibold max-w-[180px] truncate" title="{{ $s->first_name }} {{ $s->last_name }}">{{ $s->first_name }} {{ $s->last_name }}</td>
                 <td class="p-4 max-w-[140px] truncate" title="{{ $s->faculty->name ?? '' }}">{{ $s->faculty->name ?? '' }}</td>
@@ -122,7 +105,6 @@
             @endforeach
           </tbody>
         </table>
-      </form>
       </div>
       <div class="mt-8">
         {{ $students->links() }}
