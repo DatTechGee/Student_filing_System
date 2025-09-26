@@ -5,7 +5,7 @@
 <script src="https://cdn.tailwindcss.com"></script>
 <div class="min-h-screen bg-gradient-to-br from-green-100 via-white to-blue-100 flex items-center justify-center">
   <div class="bg-white rounded-2xl shadow-2xl p-10 max-w-md w-full border border-green-100">
-    <h2 class="text-3xl font-bold text-green-700 mb-8">Admin Login</h2>
+   
     <h2 class="text-3xl font-bold text-green-700 mb-8 flex items-center gap-2">
       <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-8 h-8 text-green-600"><path stroke-linecap="round" stroke-linejoin="round" d="M16.5 10.5V6.75A2.25 2.25 0 0014.25 4.5h-4.5A2.25 2.25 0 007.5 6.75v3.75m9 0V6.75A2.25 2.25 0 0014.25 4.5h-4.5A2.25 2.25 0 007.5 6.75v3.75m9 0a2.25 2.25 0 01-2.25 2.25h-9A2.25 2.25 0 013 10.5m18 0a2.25 2.25 0 01-2.25 2.25h-9A2.25 2.25 0 013 10.5" /></svg>
       Admin Login

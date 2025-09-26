@@ -9,6 +9,10 @@ class DashboardController extends Controller
 {
     public function index()
     {
+        // Prevent dashboard access if password not changed
+        if (session('must_change_password')) {
+            return redirect()->route('student.change_password')->with('info', 'Please change your password before continuing.');
+        }
         $student = \App\Models\Student::with(['faculty', 'department'])->find(session('student_id'));
         $requirementsCount = \App\Models\DocumentRequirement::where(function($q) use($student){
             $q->where('scope_type','global')
