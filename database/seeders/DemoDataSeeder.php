@@ -87,25 +87,7 @@ class DemoDataSeeder extends Seeder
                 'session' => '2025/2026',
                 'password' => bcrypt('student'),
             ]);
-            // Each student gets 2 random uploads
-            $studentReqs = array_rand($requirements, 2);
-            foreach ($studentReqs as $reqIdx) {
-                $req = $requirements[$reqIdx];
-                $fileName = 'student_' . $i . '_' . str_replace(' ', '_', strtolower($req->name)) . '.pdf';
-                $filePath = 'uploads/' . $fileName;
-                if (!Storage::disk('public')->exists($filePath)) {
-                    Storage::disk('public')->put($filePath, 'Demo PDF content for student ' . $i);
-                }
-                \App\Models\StudentDocument::firstOrCreate([
-                    'student_id' => $student->id,
-                    'requirement_id' => $req->id,
-                ], [
-                    'file_path' => $filePath,
-                    'original_filename' => $fileName,
-                    'uploaded_at' => now(),
-                    'resubmission_requested' => false,
-                ]);
-            }
+            // No upload seeding
         }
     }
 }

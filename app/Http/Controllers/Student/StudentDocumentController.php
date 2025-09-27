@@ -101,9 +101,11 @@ class StudentDocumentController extends Controller
     public function store(Request $request, $requirementId)
     {
         $requirement = DocumentRequirement::findOrFail($requirementId);
+        // If admin sets 'all', allow all supported types
         $mimes = 'pdf,jpg,jpeg,png';
-        if ($requirement->required_file_type && $requirement->required_file_type !== 'all') {
-            $mimes = $requirement->required_file_type;
+        if ($requirement->required_file_type && strtolower(trim($requirement->required_file_type)) !== 'all') {
+            // Remove spaces and ensure lower case
+            $mimes = strtolower(str_replace(' ', '', $requirement->required_file_type));
         }
         $request->validate([
             'file' => 'required|file|mimes:' . $mimes . '|max:10240'
