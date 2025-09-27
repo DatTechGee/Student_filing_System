@@ -45,7 +45,7 @@
         @csrf
         <div>
           <label for="file" class="block text-sm font-semibold mb-2">Choose file (pdf, jpg, jpeg, png - max 10MB)</label>
-          <input id="file" type="file" name="file" class="w-full border p-3 rounded mb-4" required aria-required="true" aria-label="Document file">
+          <input id="file" type="file" name="file" accept=".pdf,.jpg,.jpeg,.png" class="w-full border p-3 rounded mb-4" required aria-required="true" aria-label="Document file">
           @error('file')
             <div class="bg-red-100 border border-red-200 p-2 rounded text-red-800 text-sm mt-2">{{ $message }}</div>
           @enderror

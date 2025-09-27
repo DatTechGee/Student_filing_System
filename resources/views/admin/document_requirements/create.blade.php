@@ -78,6 +78,7 @@
     </div>
     <label class="block mb-1">Required File Type</label>
     <select name="required_file_type" class="w-full border p-2 rounded mb-2">
+      <option value="all">All (PDF, JPG, JPEG)</option>
       <option value="pdf">PDF</option>
       <option value="jpg">JPG</option>
       <option value="jpeg">JPEG</option>
