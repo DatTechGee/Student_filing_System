@@ -4,9 +4,9 @@
 @section('title','Upload Document')
 @section('content')
 <script src="https://cdn.tailwindcss.com"></script>
-<div class="min-h-screen bg-gradient-to-br from-green-100 via-white to-blue-100 flex">
+<div class="min-h-screen bg-gradient-to-br from-green-100 via-white to-blue-100 flex flex-col md:flex-row">
   <!-- Sidebar -->
-  <aside class="w-72 bg-white shadow-2xl flex flex-col justify-between rounded-r-3xl">
+  <aside class="w-full md:w-72 bg-white shadow-2xl flex flex-col justify-between rounded-none md:rounded-r-3xl">
     <div>
       <div class="p-8 border-b">
         <span class="text-2xl font-bold text-green-700">Student Panel</span>
@@ -29,8 +29,8 @@
     </div>
   </aside>
   <!-- Main Content -->
-  <main class="flex-1 flex flex-col items-center justify-center p-10">
-    <div class="bg-white rounded-2xl shadow-2xl p-10 max-w-xl w-full border border-green-100">
+  <main class="flex-1 flex flex-col items-center justify-center p-4 md:p-10">
+    <div class="bg-white rounded-2xl shadow-2xl p-4 sm:p-6 md:p-10 max-w-full md:max-w-xl w-full border border-green-100">
       <h3 class="text-2xl font-bold text-green-700 mb-6">Upload: {{ $requirement->name }}</h3>
       @if($errors->any())
         <div class="mb-4 text-red-700 bg-red-100 border border-red-200 p-3 rounded">

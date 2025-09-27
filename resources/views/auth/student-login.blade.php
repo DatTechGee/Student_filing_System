@@ -3,8 +3,8 @@
 @section('title','Student Login')
 @section('content')
 <script src="https://cdn.tailwindcss.com"></script>
-<div class="min-h-screen bg-gradient-to-br from-green-100 via-white to-blue-100 flex items-center justify-center">
-  <div class="bg-white rounded-2xl shadow-2xl p-10 max-w-md w-full border border-green-100">
+<div class="min-h-screen bg-gradient-to-br from-green-100 via-white to-blue-100 flex items-center justify-center p-4">
+  <div class="bg-white rounded-2xl shadow-2xl p-4 sm:p-6 md:p-10 max-w-full md:max-w-md w-full border border-green-100">
     <h2 class="text-3xl font-bold text-green-700 mb-8 flex items-center gap-2">
       <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-8 h-8 text-green-600"><path stroke-linecap="round" stroke-linejoin="round" d="M12 15.75a3.75 3.75 0 100-7.5 3.75 3.75 0 000 7.5z" /><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 12s3.75-7.5 9.75-7.5 9.75 7.5 9.75 7.5-3.75 7.5-9.75 7.5S2.25 12 2.25 12z" /></svg>
       Student Login

@@ -1,9 +1,9 @@
 @extends('layouts.app')
 @section('title','Add Requirement')
 @section('content')
-<div class="min-h-screen bg-gradient-to-br from-green-100 via-white to-blue-100 flex">
+<div class="min-h-screen bg-gradient-to-br from-green-100 via-white to-blue-100 flex flex-col md:flex-row">
   <!-- Sidebar -->
-  <aside class="w-72 bg-white shadow-2xl flex flex-col justify-between rounded-r-3xl">
+  <aside class="w-full md:w-72 bg-white shadow-2xl flex flex-col justify-between rounded-none md:rounded-r-3xl">
     <div>
       <div class="p-8 border-b">
         <span class="text-2xl font-bold text-green-700">Admin Panel</span>
@@ -34,8 +34,8 @@
     </div>
   </aside>
   <!-- Main Content -->
-  <main class="flex-1 flex flex-col items-center justify-center p-10">
-    <div class="bg-white rounded-2xl shadow-2xl p-10 max-w-lg w-full border border-green-100">
+  <main class="flex-1 flex flex-col items-center justify-center p-4 md:p-10">
+    <div class="bg-white rounded-2xl shadow-2xl p-4 sm:p-6 md:p-10 max-w-full md:max-w-lg w-full border border-green-100">
   @if(session('success'))
     <div class="bg-green-100 border border-green-200 p-3 rounded mb-4 text-green-800">
       {{ session('success') }}

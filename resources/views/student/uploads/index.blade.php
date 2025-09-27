@@ -5,7 +5,7 @@
 <!-- Tailwind CSS is loaded via app.css for production build -->
 <div class="flex flex-col md:flex-row min-h-screen bg-gradient-to-br from-green-100 via-white to-blue-100">
   <!-- Sidebar -->
-  <aside class="w-full md:w-72 bg-white shadow-2xl flex flex-col justify-between rounded-r-3xl">
+  <aside class="w-full md:w-72 bg-white shadow-2xl flex flex-col justify-between rounded-none md:rounded-r-3xl">
     <div>
       <div class="p-8 border-b">
         <span class="text-2xl font-bold text-green-700">Student Panel</span>
@@ -25,7 +25,7 @@
   </aside>
   <!-- Main Content -->
   <main class="flex-1 flex flex-col items-center justify-center p-4 md:p-10 animate-site-fade-in">
-    <div class="bg-white rounded-2xl shadow-2xl p-6 md:p-10 max-w-3xl w-full border border-green-100">
+    <div class="bg-white rounded-2xl shadow-2xl p-6 md:p-10 max-w-full md:max-w-3xl w-full border border-green-100">
       <h2 class="text-2xl md:text-3xl font-bold text-green-700 mb-4 md:mb-6">Welcome, {{ session('student_name') }}</h2>
       <form method="post" id="bulkActionForm" action="{{ route('student.uploads.bulk_delete') }}" x-data="{ allChecked: false }">
         @csrf

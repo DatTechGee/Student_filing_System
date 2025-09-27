@@ -1,9 +1,9 @@
 @extends('layouts.app')
 @section('title','Edit Requirement')
 @section('content')
-<div class="flex min-h-screen bg-gray-100">
+<div class="flex flex-col md:flex-row min-h-screen bg-gray-100">
   <!-- Sidebar -->
-  <aside class="w-64 bg-white shadow-lg flex flex-col justify-between">
+  <aside class="w-full md:w-64 bg-white shadow-lg flex flex-col justify-between rounded-none md:rounded-r-3xl">
     <div>
       <div class="p-6 border-b">
         <span class="text-2xl font-bold text-green-700">Admin Panel</span>
@@ -35,8 +35,8 @@
   </aside>
 
   <!-- Main content -->
-  <main class="flex-1 p-10 flex flex-col items-center justify-center">
-    <div class="bg-white rounded-lg shadow p-10 w-full max-w-xl">
+  <main class="flex-1 flex flex-col items-center justify-center p-4 md:p-10">
+    <div class="bg-white rounded-lg shadow p-4 sm:p-6 md:p-10 max-w-full md:max-w-xl w-full">
       <h2 class="text-3xl font-bold text-green-700 mb-8">Edit Requirement</h2>
       <form action="{{ route('document-requirements.update', $documentRequirement) }}" method="post">
         @csrf
