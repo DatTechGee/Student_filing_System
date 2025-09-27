@@ -29,9 +29,9 @@ class AdminAuthController extends Controller
             return back()->with('error','Invalid credentials');
         }
 
-        // store session
-        session(['admin_id' => $admin->id, 'admin_name' => $admin->name]);
-        return redirect()->route('admin.dashboard');
+    // store session
+    session(['admin_id' => $admin->id, 'admin_name' => $admin->name]);
+    return redirect()->route('admin.dashboard')->with('success', 'Login successful!');
     }
 
     public function logout()

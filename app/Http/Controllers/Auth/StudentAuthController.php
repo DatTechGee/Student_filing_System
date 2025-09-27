@@ -36,7 +36,7 @@ class StudentAuthController extends Controller
             session()->forget('must_change_password');
         }
 
-        return redirect()->route('student.dashboard');
+    return redirect()->route('student.dashboard')->with('success', 'Login successful!');
     }
 
     public function logout()

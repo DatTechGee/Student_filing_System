@@ -42,6 +42,29 @@
         @csrf
         @method('PUT')
         <input name="name" value="{{ $documentRequirement->name }}" placeholder="Requirement Name" class="w-full border p-2 rounded mb-2">
+        <select name="scope_type" id="scope_type" class="w-full border p-2 rounded mb-2" onchange="toggleScopeFields()">
+          <option value="global" @if($documentRequirement->scope_type=='global') selected @endif>Global</option>
+          <option value="faculty" @if($documentRequirement->scope_type=='faculty') selected @endif>Faculty</option>
+          <option value="department" @if($documentRequirement->scope_type=='department') selected @endif>Department</option>
+        </select>
+        <div id="faculty_field" style="display:none;">
+          <label class="block mb-1">Select Faculty</label>
+          <select name="faculty_id" id="faculty_id" class="w-full border p-2 rounded mb-2">
+            <option value="">-- Select Faculty --</option>
+            @foreach($faculties as $faculty)
+              <option value="{{ $faculty->id }}" @if(isset($documentRequirement->faculty_id) && $documentRequirement->faculty_id == $faculty->id) selected @endif>{{ $faculty->name }}</option>
+            @endforeach
+          </select>
+        </div>
+        <div id="department_field" style="display:none;">
+          <label class="block mb-1">Select Department</label>
+          <select name="department_id" id="department_id" class="w-full border p-2 rounded mb-2">
+            <option value="">-- Select Department --</option>
+            @foreach($departments as $department)
+              <option value="{{ $department->id }}" @if(isset($documentRequirement->department_id) && $documentRequirement->department_id == $department->id) selected @endif>{{ $department->name }}</option>
+            @endforeach
+          </select>
+        </div>
         <label class="block mb-1">Required File Type</label>
         <select name="required_file_type" class="w-full border p-2 rounded mb-4">
           <option value="all" @if($documentRequirement->required_file_type=='all') selected @endif>All (PDF, JPG, JPEG, PNG)</option>
@@ -52,6 +75,14 @@
         </select>
         <button class="btn-primary px-4 py-2 rounded">Update</button>
       </form>
+      <script>
+        function toggleScopeFields() {
+          var scope = document.getElementById('scope_type').value;
+          document.getElementById('faculty_field').style.display = (scope === 'faculty' || scope === 'department') ? 'block' : 'none';
+          document.getElementById('department_field').style.display = (scope === 'department') ? 'block' : 'none';
+        }
+        document.addEventListener('DOMContentLoaded', toggleScopeFields);
+      </script>
     </div>
   </main>
 </div>
